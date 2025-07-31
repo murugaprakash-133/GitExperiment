@@ -3,12 +3,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .cursor-follower {
+            width: 20px;
+            height: 20px;
+            background: rgba(123, 239, 178, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 20px rgba(123, 239, 178, 0.3);
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            cursor: none;
+            background: linear-gradient(45deg, #000000, #1a1a1a, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>This is my first git experiment</h2>
-    <p>Updated readme file</p>
-
-    <h3>This is from feature branch</h3>
-    <h3>This is from feature branch</h3>
+    <div class="cursor-follower"></div>
+    <script>
+        const cursor = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            
+            // Add scale effect on movement
+            cursor.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                cursor.style.transform = 'scale(1)';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
